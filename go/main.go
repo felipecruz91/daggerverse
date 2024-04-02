@@ -18,8 +18,4 @@ const (
 	defaultGoVersion = "1.22.0"
 )
 
-var (
-	defaultPlatforms = []string{"linux/amd64", "linux/arm64"}
-)
-
 type GoDagger struct{}
