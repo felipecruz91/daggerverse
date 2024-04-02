@@ -1,5 +1,6 @@
 {
   "name": "scout",
   "sdk": "go",
-  "engineVersion": "v0.10.1"
+  "source": ".",
+  "engineVersion": "v0.10.3"
 }

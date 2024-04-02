@@ -1,4 +1,4 @@
-module scout
+module dagger/scout
 
 go 1.21.7
 
