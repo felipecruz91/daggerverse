@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	platformFormat "github.com/containerd/containerd/platforms"
+	platformFormat "github.com/containerd/platforms"
 )
 
 // Build builds the Go binary for the specified go version and platforms
@@ -27,8 +27,8 @@ func (m *GoDagger) Build(ctx context.Context,
 	var files []*File
 
 	for _, platform := range platforms {
-		os := platformFormat.MustParse(string(platform)).OS
-		arch := platformFormat.MustParse(string(platform)).Architecture
+		os := platformFormat.MustParse(platform).OS
+		arch := platformFormat.MustParse(platform).Architecture
 		binaryName := fmt.Sprintf("app_%s_%s", os, arch)
 
 		ctr, err := m.buildBinary(ctx, source, goVersion, platform)
@@ -45,8 +45,8 @@ func (m *GoDagger) Build(ctx context.Context,
 func (m *GoDagger) buildBinary(ctx context.Context, source *dagger.Directory, goVersion string, platform string) (*Container, error) {
 	fmt.Printf("Building binary for %s...\n", platform)
 
-	os := platformFormat.MustParse(string(platform)).OS
-	arch := platformFormat.MustParse(string(platform)).Architecture
+	os := platformFormat.MustParse(platform).OS
+	arch := platformFormat.MustParse(platform).Architecture
 	binaryName := fmt.Sprintf("app_%s_%s", os, arch)
 
 	cli := dag.Pipeline("go-build-" + binaryName)

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"runtime"
 
-	platformFormat "github.com/containerd/containerd/platforms"
+	platformFormat "github.com/containerd/platforms"
 )
 
 // DockerBuild packages the Go binary into a container image
@@ -22,8 +22,8 @@ func (m *GoDagger) DockerBuild(ctx context.Context,
 		platform = "linux/" + runtime.GOARCH
 	}
 
-	os := platformFormat.MustParse(string(platform)).OS
-	arch := platformFormat.MustParse(string(platform)).Architecture
+	os := platformFormat.MustParse(platform).OS
+	arch := platformFormat.MustParse(platform).Architecture
 	binaryName := fmt.Sprintf("app_%s_%s", os, arch)
 
 	return cli.Container(ContainerOpts{Platform: Platform(platform)}).
